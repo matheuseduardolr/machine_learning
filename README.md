@@ -4,7 +4,7 @@ Repositório contendo projetos práticos de Machine Learning, abrangendo desde p
 
 
 
-## Projetos
+## 
 
 ### project_preprocessing_feature_engineering
 - Pipeline de pré-processamento e feature engineering para dados de clientes, incluindo análise exploratória (EDA), tratamento de dados, transformação e criação de features.
