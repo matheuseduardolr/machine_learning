@@ -1,53 +1,41 @@
-# Agrupamento de condomínios com K-Means
+# K-Means Geographic Clustering
 
-Estudo de agrupamento geográfico dos condomínios de uma rota operacional no litoral de Maceió e na Praia do Francês. O objetivo é formar 6 núcleos pela proximidade, com volume parecido entre os grupos.
+Agrupamento geográfico dos condomínios de uma rota operacional no litoral de Maceió e na Praia do Francês, formando núcleos de proximidade com volume parecido.
 
-## Objetivo
 
-Particionar os condomínios em **k = 6** núcleos de modo que:
 
-- prédios próximos fiquem no mesmo núcleo;
-- nenhum núcleo concentre quase toda a rota enquanto outro fica com poucos prédios.
+## Overview
 
-O K-Means clássico não controla o tamanho dos grupos. Aqui a atribuição dos pontos aos centros respeita uma capacidade, e cada núcleo fica com 22 ou 23 condomínios.
+Projeto focado na construção de um agrupamento com **Python** e **Scikit-learn**, cobrindo geocodificação, projeção local e **K-Means** com restrição de capacidade. O objetivo é formar **6 núcleos** pela proximidade, com um volume próximo de condomínios em cada grupo.
 
-## Dados
 
-A planilha `data/localizacao_condominios.xlsx` traz nome, endereço, bairro e cidade. Esses campos são geocodificados para latitude e longitude, que entram no modelo como atributos. Três endereços não foram localizados pelo geocodificador e usam coordenada informada manualmente.
 
-## Método
+## Mapa
 
-1. Geocodificar nome, endereço, bairro e cidade.
-2. Projetar latitude e longitude para um plano local em metros, para que a distância euclidiana do K-Means corresponda à proximidade no mapa.
-3. Ajustar `KMeans(n_clusters=6, n_init=20, random_state=42)`.
-4. Reatribuir cada condomínio ao centro mais próximo, com vagas limitadas, pelo algoritmo de atribuição de custo mínimo.
-5. Numerar os núcleos pela latitude do centroide, de sul para norte, e associar uma cor a cada um.
+[![Núcleos](images/nucleos_kmeans.png)](https://htmlpreview.github.io/?https://github.com/matheuseduardolr/machine_learning/blob/main/project_clustering_kmeans/images/nucleos_mapa.html)
 
-## Resultados
+[Abrir mapa interativo](https://htmlpreview.github.io/?https://github.com/matheuseduardolr/machine_learning/blob/main/project_clustering_kmeans/images/nucleos_mapa.html)
 
-- 134 condomínios georreferenciados.
-- 6 núcleos, com 22 ou 23 condomínios cada.
-- Planilha com latitude, longitude, núcleo e cor.
-- Gráfico em `images/nucleos_kmeans.png`.
-- Mapa interativo em `images/nucleos_mapa.html`.
 
-## Como executar
 
-Na pasta do projeto:
+## Tech Stack
 
-```text
-uv run project-clustering-kmeans
-```
+* Python 3.12  
+* Pandas, NumPy  
+* Scikit-learn (KMeans)  
+* SciPy (atribuição com capacidade)  
+* Matplotlib, Folium  
+* GeoPy, OpenPyXL  
 
-O notebook `notebooks/main.ipynb` reproduz o agrupamento a partir das coordenadas já gravadas na planilha, sem chamar o geocodificador de novo.
 
-## Estrutura
+
+## Estrutura do Projeto
 
 ```text
 .
 ├── data/                  # planilha e cache de geocodificação
 ├── images/                # gráfico e mapa dos núcleos
-├── notebooks/main.ipynb   # estudo do K-Means
+├── notebooks/             # estudo do K-Means
 └── src/project_clustering_kmeans/
     ├── geocoding.py       # endereço → coordenada
     ├── clustering.py      # K-Means com capacidade
@@ -56,11 +44,14 @@ O notebook `notebooks/main.ipynb` reproduz o agrupamento a partir das coordenada
     └── pipeline.py        # execução do estudo
 ```
 
-## Tecnologias
 
-* Python 3.12
-* Pandas, NumPy
-* Scikit-learn (`KMeans`)
-* SciPy (atribuição com capacidade)
-* Matplotlib, Folium
-* GeoPy, OpenPyXL
+
+## Workflow
+
+* **Geocodificação:** nome, endereço, bairro e cidade viram latitude e longitude. Três endereços não localizados usam coordenada informada.  
+
+* **Projeção:** latitude e longitude são convertidas para um plano local em metros, para a distância euclidiana corresponder à proximidade no mapa.  
+
+* **K-Means:** ajuste de `KMeans(n_clusters=6, n_init=20, random_state=42)` e reatribuição de cada condomínio ao centro mais próximo, com vagas limitadas.  
+
+* **Resultados:** núcleos numerados de sul para norte, com cor, planilha atualizada, gráfico em `images/nucleos_kmeans.png` e mapa em `images/nucleos_mapa.html`.  
