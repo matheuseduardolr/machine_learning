@@ -1,4 +1,4 @@
-# 🔄 Customer Data Preprocessing & Feature Engineering Pipeline
+# Customer Data Preprocessing & Feature Engineering Pipeline
 
 
 
@@ -6,20 +6,20 @@ Pipeline de pré-processamento e feature engineering para dados de clientes, pro
 
 
 
-## 🚀 Overview
+## Overview
 
 Projeto focado na construção de um workflow de dados com **Python** e **Scikit-learn**, cobrindo etapas de **limpeza, transformação e geração de features**. Incluindo análise exploratória (**EDA**), limpeza, transformação e feature engineering, com pré-processamento estruturado usando **Pipeline**.
 
 
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * Python 3.12  
 * Pandas, NumPy  
 * Matplotlib, Seaborn  
 * Scikit-learn (Pipeline, ColumnTransformer, Encoding, Scaling)  
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```text
 .
@@ -27,7 +27,7 @@ Projeto focado na construção de um workflow de dados com **Python** e **Scikit
 ├── notebooks/          # análise exploratória e pipeline
 ```
 
-## 🔁 Workflow
+## Workflow
 
 * **EDA:** análise exploratória com pandas (shape, tipos, estatísticas), identificação de valores faltantes e visualização com gráficos e heatmap.  
 
