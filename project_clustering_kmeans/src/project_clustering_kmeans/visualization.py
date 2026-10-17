@@ -12,6 +12,13 @@ from scipy.spatial import ConvexHull, QhullError
 
 from project_clustering_kmeans.settings import MAP_PATH, NUCLEUS_COLORS, PLOT_PATH
 
+# O htmlpreview do GitHub só executa scripts que estão no repositório.
+# Leaflet e jQuery ficam em vendor/ e o HTML aponta para esses arquivos.
+_LOCAL_SCRIPTS = {
+    "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js": "../vendor/leaflet.js",
+    "https://code.jquery.com/jquery-3.7.1.min.js": "../vendor/jquery.min.js",
+}
+
 
 def save_plot(rows: list[dict], located: dict[int, dict], nuclei: dict[int, int]) -> None:
     PLOT_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -52,6 +59,13 @@ def group_polygon(latitudes: list[float], longitudes: list[float]) -> list[list[
     except QhullError:
         return None
     return points[hull.vertices].tolist()
+
+
+def _use_local_scripts(path) -> None:
+    text = path.read_text(encoding="utf-8")
+    for remote, local in _LOCAL_SCRIPTS.items():
+        text = text.replace(f'<script src="{remote}"></script>', f'<script src="{local}"></script>')
+    path.write_text(text, encoding="utf-8")
 
 
 def save_map(rows: list[dict], located: dict[int, dict], nuclei: dict[int, int]) -> None:
@@ -126,3 +140,4 @@ def save_map(rows: list[dict], located: dict[int, dict], nuclei: dict[int, int])
     folium.LayerControl(collapsed=False).add_to(mapa)
     mapa.fit_bounds([[min(latitudes), min(longitudes)], [max(latitudes), max(longitudes)]], padding=(24, 24))
     mapa.save(MAP_PATH)
+    _use_local_scripts(MAP_PATH)

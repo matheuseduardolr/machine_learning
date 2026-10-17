@@ -36,6 +36,7 @@ Projeto focado na construção de um agrupamento com **Python** e **Scikit-learn
 ├── data/                  # planilha e cache de geocodificação
 ├── images/                # gráfico e mapa dos núcleos
 ├── notebooks/             # estudo do K-Means
+├── vendor/                # Leaflet e jQuery usados pelo mapa
 └── src/project_clustering_kmeans/
     ├── geocoding.py       # endereço → coordenada
     ├── clustering.py      # K-Means com capacidade
